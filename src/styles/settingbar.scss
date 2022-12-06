@@ -1,0 +1,14 @@
+@import './variables';
+
+.settingBar {
+	display: flex;
+	align-items: center;
+	position: absolute;
+	top: $toolbar-height;
+	padding: $toolbar-padding;
+	height: $toolbar-height;
+	width: 100%;
+
+	background-color: white;
+	box-shadow: 0 4px 5px gray;
+}
