@@ -1,15 +1,47 @@
-import React from 'react';
+import React 			from 'react';
+import canvasState 		from '../store/canvasState';
+import toolState 		from '../store/toolState';
+import Brush 			from '../tools/Brush';
+import Rect 			from '../tools/Rect';
+import Circle 			from '../tools/Circle';
+import Eraser 			from '../tools/Eraser';
+import Line 			from '../tools/Line';
 import '../styles/toolbar.scss';
 
 
 const Toolbar = () => {
 	return (
 		<div className="toolbar">
-			<button className='toolbarBtn brush' />
-			<button className='toolbarBtn rect' />
-			<button className='toolbarBtn circle' />
-			<button className='toolbarBtn eraser' />
-			<button className='toolbarBtn line' />
+			<button 
+				className='toolbarBtn brush'
+				onClick={() => toolState.setTool(
+					new Brush(canvasState.canvas)
+				)}
+			/>
+			<button 
+				className='toolbarBtn rect'
+				onClick={() => toolState.setTool(
+					new Rect(canvasState.canvas)
+				)}
+			/>
+			<button 
+				className='toolbarBtn circle'
+				onClick={() => toolState.setTool(
+					new Circle(canvasState.canvas)
+				)}
+			/>
+			<button 
+				className='toolbarBtn eraser'
+				onClick={() => toolState.setTool(
+					new Eraser(canvasState.canvas)
+				)}
+			/>
+			<button 
+				className='toolbarBtn line'
+				onClick={() => toolState.setTool(
+					new Line(canvasState.canvas)
+				)}
+			/>
 			<input 	type="color" className='palette' />
 			<button className='toolbarBtn undo' />
 			<button className='toolbarBtn redo' />
