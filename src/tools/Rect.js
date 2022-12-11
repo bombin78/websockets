@@ -65,7 +65,7 @@ export default class Rect extends Tools {
 			// Вызов функции для заполнения прямоугольника
 			this.ctx.fill();
 			// Задаем цвет, используемый при выполнении обводки фигур (контура)
-			this.ctx.strokeStyle = 'rgb(0,0,0)';
+			// this.ctx.strokeStyle = 'rgb(0,0,0)';
 			// Вызов функции для обводки контура, который был заранее задан.
 			// Цвет задается через strokeStyle, по умолчанию он черный.
 			this.ctx.stroke();

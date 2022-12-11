@@ -40,7 +40,7 @@ export default class Brush extends Tools {
 	draw(x, y) {
 		// Вызов функции для отрисовки линии
 		this.ctx.lineTo(x, y);
-		this.ctx.strokeStyle = 'rgb(0,0,0)';
+		//this.ctx.strokeStyle = 'rgb(0,0,0)';
 		this.ctx.stroke();
 		console.log('using brush');
 	}

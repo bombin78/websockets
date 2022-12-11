@@ -10,6 +10,12 @@ import '../styles/toolbar.scss';
 
 
 const Toolbar = () => {
+
+	const changeColor = (value) => {
+		toolState.setStrokeColor(value);
+		toolState.setFillColor(value);
+	};
+
 	return (
 		<div className="toolbar">
 			<button 
@@ -42,7 +48,11 @@ const Toolbar = () => {
 					new Line(canvasState.canvas)
 				)}
 			/>
-			<input 	type="color" className='palette' />
+			<input
+				type="color" 
+				className='palette' 
+				onChange={(e) => changeColor(e.target.value)}
+			/>
 			<button className='toolbarBtn undo' />
 			<button className='toolbarBtn redo' />
 			<button className='toolbarBtn save' />

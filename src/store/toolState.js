@@ -8,9 +8,21 @@ class ToolState {
 		makeAutoObservable(this)
 	}
 
-	// Экшен - функция, которая изменяет состояние
+	// Экшены - функции, которые изменяют состояние
 	setTool(tool) {
 		this.tool = tool;
+	}
+
+	setFillColor(color) {
+		this.tool.fillColor = color;
+	}
+
+	setStrokeColor(color) {
+		this.tool.strokeColor = color;
+	}
+
+	setLineWidth(width) {
+		this.tool.lineWidth = width;
 	}
 }
 

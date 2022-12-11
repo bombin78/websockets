@@ -11,4 +11,19 @@
 
 	background-color: white;
 	box-shadow: 0 4px 5px gray;
+
+	.labelWidth {
+		margin-right: 10px;
+	}
+
+	.labelColor {
+		margin: {
+			right: 10px;
+			left: 32px;
+		}
+	}
+
+	.lineWidth {
+		width: 52px;
+	}
 }
