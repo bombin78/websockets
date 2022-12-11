@@ -53,8 +53,14 @@ const Toolbar = () => {
 				className='palette' 
 				onChange={(e) => changeColor(e.target.value)}
 			/>
-			<button className='toolbarBtn undo' />
-			<button className='toolbarBtn redo' />
+			<button 
+				className='toolbarBtn undo' 
+				onClick={canvasState.undo}
+			/>
+			<button 
+				className='toolbarBtn redo' 
+				onClick={canvasState.redo}
+			/>
 			<button className='toolbarBtn save' />
 		</div>
 	);
