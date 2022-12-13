@@ -4,6 +4,7 @@ class CanvasState {
 	canvas = null;
 	undoList = [];
 	redoList = [];
+	username = '';
 
 	constructor() {
 		// Эта функция делает отслеживаемыми данные хранящиеся в этом классе
@@ -15,6 +16,10 @@ class CanvasState {
 	// Экшены - функции, которые изменяют состояние
 	setCanvas(canvas) {
 		this.canvas = canvas;
+	}
+
+	setUsername(username) {
+		this.username = username;
 	}
 
 	pushToUndo(data) {
