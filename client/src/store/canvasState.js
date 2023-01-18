@@ -2,9 +2,11 @@ const { makeAutoObservable } = require("mobx");
 
 class CanvasState {
 	canvas = null;
+	socket = null;
+	sessionId = null;
+	username = '';
 	undoList = [];
 	redoList = [];
-	username = '';
 
 	constructor() {
 		// Эта функция делает отслеживаемыми данные хранящиеся в этом классе
@@ -16,6 +18,14 @@ class CanvasState {
 	// Экшены - функции, которые изменяют состояние
 	setCanvas(canvas) {
 		this.canvas = canvas;
+	}
+
+	setSocket(socket) {
+		this.socket = socket;
+	}
+
+	setSessionId(id) {
+		this.sessionId = id;
 	}
 
 	setUsername(username) {

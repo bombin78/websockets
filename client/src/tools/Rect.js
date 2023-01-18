@@ -3,8 +3,8 @@ import Tools from './Tools';
 
 export default class Rect extends Tools {
 	
-	constructor(canvas) {
-		super(canvas);
+	constructor(canvas, socket, id) {
+		super(canvas, socket, id);
 		this.listen();
 	}
 
@@ -16,6 +16,17 @@ export default class Rect extends Tools {
 
 	mouseUpHandler(e) {
 		this.mouseDown = false;
+		this.socket.send(JSON.stringify({
+			method: 'draw',
+			id: this.id,
+			figure: {
+				type: 'rect',
+				x: this.startX,
+				y: this.startY,
+				width: this.width,
+				height: this.height,
+			},
+		}));
 	}
 
 	mouseDownHandler(e) {
@@ -33,16 +44,16 @@ export default class Rect extends Tools {
 		if(this.mouseDown) {
 			const currentX = e.pageX - e.target.offsetLeft;
 			const currentY = e.pageY - e.target.offsetTop;
-			const width = currentX - this.startX;
-			const height = currentY - this.startY;
+			this.width = currentX - this.startX;
+			this.height = currentY - this.startY;
 
 			// Эта функция будет вызываться каждый раз,
 			// когда пользователь пошевелил мышкой
 			this.draw(
 				this.startX,
 				this.startY,
-				width,
-				height
+				this.width,
+				this.height,
 			);
 		}
 	}
@@ -71,5 +82,12 @@ export default class Rect extends Tools {
 			this.ctx.stroke();
 			console.log('using rect');
 		};
+	}
+
+	static staticDraw(ctx, x, y, w, h) {
+		ctx.beginPath();
+		ctx.rect(x, y, w, h);
+		ctx.fill();
+		ctx.stroke();
 	}
 }

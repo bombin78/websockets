@@ -3,8 +3,8 @@ import Tools from './Tools';
 
 export default class Brush extends Tools {
 
-	constructor(canvas) {
-		super(canvas);
+	constructor(canvas, socket, id) {
+		super(canvas, socket, id);
 		this.listen();
 	}
 
@@ -16,6 +16,13 @@ export default class Brush extends Tools {
 
 	mouseUpHandler(e) {
 		this.mouseDown = false;
+		this.socket.send(JSON.stringify({
+			method: 'draw',
+			id: this.id,
+			figure: {
+				type: 'finish',
+			},
+		}));
 	}
 
 	mouseDownHandler(e) {
@@ -30,18 +37,27 @@ export default class Brush extends Tools {
 
 	mouseMoveHandler(e) {
 		if(this.mouseDown) {
-			this.draw(
-				e.pageX - e.target.offsetLeft,
-				e.pageY - e.target.offsetTop
-			);
+			// this.draw(
+			// 	e.pageX - e.target.offsetLeft,
+			// 	e.pageY - e.target.offsetTop
+			// );
+			this.socket.send(JSON.stringify({
+				method: 'draw',
+				id: this.id,
+				figure: {
+					type: 'brush',
+					x: e.pageX - e.target.offsetLeft,
+					y: e.pageY - e.target.offsetTop,
+				},
+			}));
 		}
 	}
 
-	draw(x, y) {
+	static draw(ctx, x, y) {
 		// Вызов функции для отрисовки линии
-		this.ctx.lineTo(x, y);
+		ctx.lineTo(x, y);
 		//this.ctx.strokeStyle = 'rgb(0,0,0)';
-		this.ctx.stroke();
+		ctx.stroke();
 		console.log('using brush');
 	}
 }

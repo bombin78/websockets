@@ -21,13 +21,21 @@ const Toolbar = () => {
 			<button 
 				className='toolbarBtn brush'
 				onClick={() => toolState.setTool(
-					new Brush(canvasState.canvas)
+					new Brush(
+						canvasState.canvas,
+						canvasState.socket,
+						canvasState.sessionId,
+					)
 				)}
 			/>
 			<button 
 				className='toolbarBtn rect'
 				onClick={() => toolState.setTool(
-					new Rect(canvasState.canvas)
+					new Rect(
+						canvasState.canvas,
+						canvasState.socket,
+						canvasState.sessionId,
+					)
 				)}
 			/>
 			<button 
