@@ -69,7 +69,14 @@ const Canvas = observer(() => {
         break;
 
       case 'rect':
-        Rect.staticDraw(ctx, figure.x, figure.y, figure.width, figure.height);
+        Rect.staticDraw(
+          ctx, 
+          figure.x, 
+          figure.y, 
+          figure.width, 
+          figure.height,
+          figure.color,
+        );
         break;
 
       case 'finish':
