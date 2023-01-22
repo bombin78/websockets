@@ -9,6 +9,7 @@ import {
   Modal, 
   Button 
 }                     from 'react-bootstrap';
+import axios          from 'axios';
 import canvasState    from '../store/canvasState';
 import toolState      from '../store/toolState';
 import Brush          from '../tools/Brush';
@@ -24,7 +25,18 @@ const Canvas = observer(() => {
 
   // Инициализация кисти по умолчанию
   useEffect(() => {
+    const ctx = canvasRef.current.getContext('2d');
     canvasState.setCanvas(canvasRef.current);
+    axios
+      .get(`http://localhost:5000/image?id=${params.id}`)
+      .then((resp) => {
+          const img = new Image();
+          img.src = resp.data;
+          img.onload = () => {
+            ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+            ctx.drawImage(img, 0, 0, canvasRef.current.width, canvasRef.current.height);
+          };
+      })
   }, []);
 
   // После ввода имени пользователя устанавливаем соединение по ws 
@@ -92,13 +104,16 @@ const Canvas = observer(() => {
     }
   };
 
-  const mouseDownHandler = () => {
-    canvasState.pushToUndo(canvasRef.current.toDataURL());
-  };
-
   const connectHandler = () => {
     canvasState.setUsername(usernameRef.current.value);
     setModal(false);
+  };
+
+  const mouseUpHandler = () => {
+    canvasState.pushToUndo(canvasRef.current.toDataURL());
+    axios
+      .post(`http://localhost:5000/image?id=${params.id}`, {img: canvasRef.current.toDataURL()})
+      .then((resp) => console.log(resp.data));
   };
 
   return (
@@ -127,7 +142,7 @@ const Canvas = observer(() => {
         ref={canvasRef}
         width={600}
         height={400}
-        onMouseDown={mouseDownHandler}
+        onMouseUp={mouseUpHandler}
       />
     </div>
   );
